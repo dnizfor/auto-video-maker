@@ -3,7 +3,8 @@
     "canvas": "^2.11.0",
     "ffmpeg-static": "^5.1.0",
     "fluent-ffmpeg": "^2.1.2",
-    "text-to-image": "^5.2.0"
+    "text-to-image": "^5.2.0",
+    "text-to-mp3": "^1.0.4"
   },
   "name": "yt",
   "type": "module",
