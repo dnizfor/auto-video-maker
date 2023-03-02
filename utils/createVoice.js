@@ -1,13 +1,9 @@
-import txtomp3 from "text-to-mp3";
+import gtts from "node-gtts";
+import path from "path";
+const createVoice = (text, lan, outputPath) => {
+  var filepath = path.join(outputPath);
 
-export default createVoice = (text, outputPath) => {
-  txtomp3.getMp3(text, function (err, binaryStream) {
-    if (err) {
-      console.log(err);
-      return;
-    }
-    var file = fs.createWriteStream(outputPath); // write it down the file
-    file.write(binaryStream);
-    file.end();
-  });
+  gtts(lan).save(filepath, text, function () {});
 };
+
+export default createVoice;
