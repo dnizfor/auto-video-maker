@@ -4,7 +4,10 @@ import fs from "fs";
 import createVoice from "./utils/createVoice.js";
 import mergeAllClips from "./utils/mergeAllClips.js";
 
-const wordsOfLevel = wordList.filter((index) => index.level === "A1");
+const wordsOfLevel = wordList
+  .filter((index) => index.level === "A1")
+  .slice(0, 3);
+console.log(wordsOfLevel);
 
 const createVideoParts = async () => {
   for (let index = 0; index < wordsOfLevel.length; index++) {
@@ -22,12 +25,18 @@ const createVideoParts = async () => {
       if (index % 10) {
         await setTimeout(() => console.log("wait"), 3000);
       }
-      for (let index = 0; index < wordsOfLevel.length * 2; index++) {
+      for (let index = 0; index < wordsOfLevel.length; index++) {
+        await createVideo(
+          wordsOfLevel[index].word,
+          "",
+          `clips/${index * 2}.mp4`,
+          `voices/${index * 2}.mp3`
+        );
         await createVideo(
           wordsOfLevel[index].word,
           wordsOfLevel[index].mean,
-          `clips/${index}.mp4`,
-          `voices/${index}.mp3`
+          `clips/${index * 2 + 1}.mp4`,
+          `voices/${index * 2 + 1}.mp3`
         );
       }
     }
