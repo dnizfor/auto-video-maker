@@ -3,7 +3,7 @@ import createVideo from "./utils/createVideo.js";
 import createVoice from "./utils/createVoice.js";
 import mergeAllClips from "./utils/mergeAllClips.js";
 
-const wordsOfLevel = wordList.filter((index) => index.level === "A1");
+const wordsOfLevel = wordList.filter((index) => index.level === "A2");
 
 const createVideoParts = async () => {
   for (let index = 0; index < wordsOfLevel.length; index++) {
@@ -18,22 +18,40 @@ const createVideoParts = async () => {
       `./voices/${index * 2 + 1}.mp3`
     );
     if (index + 1 === wordsOfLevel.length) {
-      if (index % 10) {
-        await setTimeout(() => console.log("wait"), 3000);
+      if (index % 9) {
+        await setTimeout(() => console.log("wait"), 5000);
       }
       for (let index = 0; index < wordsOfLevel.length; index++) {
-        await createVideo(
-          wordsOfLevel[index].word,
-          "",
-          `clips/${index * 2}.mp4`,
-          `voices/${index * 2}.mp3`
-        );
-        await createVideo(
-          wordsOfLevel[index].word,
-          wordsOfLevel[index].mean,
-          `clips/${index * 2 + 1}.mp4`,
-          `voices/${index * 2 + 1}.mp3`
-        );
+        try {
+          await createVideo(
+            wordsOfLevel[index].word,
+            "",
+            `clips/${index * 2}.mp4`,
+            `./voices/${index * 2}.mp3`
+          );
+        } catch {
+          await createVideo(
+            wordsOfLevel[index].word,
+            "",
+            `clips/${index * 2}.mp4`,
+            "assets/errsound.mp3"
+          );
+        }
+        try {
+          await createVideo(
+            wordsOfLevel[index].word,
+            wordsOfLevel[index].mean,
+            `clips/${index * 2 + 1}.mp4`,
+            `voices/${index * 2 + 1}.mp3`
+          );
+        } catch {
+          await createVideo(
+            wordsOfLevel[index].word,
+            wordsOfLevel[index].mean,
+            `clips/${index * 2}.mp4`,
+            "assets/errsound.mp3"
+          );
+        }
       }
     }
   }
