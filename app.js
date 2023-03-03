@@ -1,13 +1,9 @@
 import wordList from "./lib/wordList.json" assert { type: "json" };
 import createVideo from "./utils/createVideo.js";
-import fs from "fs";
 import createVoice from "./utils/createVoice.js";
 import mergeAllClips from "./utils/mergeAllClips.js";
 
-const wordsOfLevel = wordList
-  .filter((index) => index.level === "A1")
-  .slice(0, 3);
-console.log(wordsOfLevel);
+const wordsOfLevel = wordList.filter((index) => index.level === "A1");
 
 const createVideoParts = async () => {
   for (let index = 0; index < wordsOfLevel.length; index++) {
