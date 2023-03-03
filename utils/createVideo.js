@@ -32,7 +32,7 @@ const createVideo = async (text1, text2, outputPath, soundPath) => {
 
   // The video length and frame rate, as well as the number of frames required
   // to create the video
-  const duration = 6;
+  const duration = 3;
   const frameRate = 5;
   const frameCount = Math.floor(duration * frameRate);
 
@@ -69,8 +69,8 @@ const createVideo = async (text1, text2, outputPath, soundPath) => {
     let t = time / duration;
 
     // Draw the image from left to right over a distance of 550 pixels
-    context.drawImage(logo, 100 + t * 550, 300);
-    context.drawImage(logo2, 100 + t * 550, 400);
+    context.drawImage(logo, 100, 300);
+    context.drawImage(logo2, 100, 400);
     context.drawImage(icon, 1050, 10);
   }
 };
