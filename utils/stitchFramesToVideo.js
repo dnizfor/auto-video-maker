@@ -2,7 +2,7 @@ import ffmpeg from "fluent-ffmpeg";
 
 export async function stitchFramesToVideo(
   framesFilepath,
-  //   soundtrackFilePath,
+  soundtrackFilePath,
   outputFilepath,
   duration,
   frameRate
@@ -16,12 +16,12 @@ export async function stitchFramesToVideo(
         `-framerate ${frameRate}`,
       ])
 
-      //   // Add the soundtrack
-      //   .input(soundtrackFilePath)
-      //   .audioFilters([
-      //     // Fade out the volume 2 seconds before the end
-      //     `afade=out:st=${duration - 2}:d=2`,
-      //   ])
+      // Add the soundtrack
+      .input(soundtrackFilePath)
+      .audioFilters([
+        // Fade out the volume 2 seconds before the end
+        `afade=out:st=${duration - 2}:d=2`,
+      ])
 
       .videoCodec("libx264")
       .outputOptions([
