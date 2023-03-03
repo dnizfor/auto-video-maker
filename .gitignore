@@ -1,0 +1,5 @@
+./node_modules
+./clips/
+./frames/
+./output/
+package-lock.json
