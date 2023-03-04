@@ -3,18 +3,22 @@ import ffmpegStatic from "ffmpeg-static";
 import ffmpeg from "fluent-ffmpeg";
 import { Canvas, loadImage } from "canvas";
 import { stitchFramesToVideo } from "./stitchFramesToVideo.js";
-import textToImage from "text-to-image";
+import { UltimateTextToImage } from "ultimate-text-to-image";
 
 const createVideo = async (text1, text2, outputPath, soundPath) => {
   // Tell fluent-ffmpeg where it can find FFmpeg
   ffmpeg.setFfmpegPath(ffmpegStatic);
 
-  const dataUri = await textToImage.generate(text1, {
+  const dataUri = new UltimateTextToImage(text1, {
     fontSize: 50,
-  });
-  const dataUri2 = await textToImage.generate(text2, {
+  })
+    .render()
+    .toDataUrl();
+  const dataUri2 = new UltimateTextToImage(text2, {
     fontSize: 20,
-  });
+  })
+    .render()
+    .toDataUrl();
   // Clean up the temporary directories first
   for (const path of ["output", "frames"]) {
     if (fs.existsSync(path)) {

@@ -9,8 +9,8 @@
     "ffprobe": "^1.1.2",
     "fluent-ffmpeg": "^2.1.2",
     "node-gtts": "^2.0.2",
-    "text-to-image": "^5.2.0",
-    "text-to-mp3": "^1.0.4"
+    "text-to-mp3": "^1.0.4",
+    "ultimate-text-to-image": "^1.0.1"
   },
   "name": "yt",
   "type": "module",

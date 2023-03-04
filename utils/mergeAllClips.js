@@ -4,7 +4,6 @@ import Ffmpeg from "fluent-ffmpeg";
 const mergeAllClips = (videoNames, outputPath) => {
   let mergedVideo = Ffmpeg();
   videoNames.forEach((video) => (mergedVideo = mergedVideo.input(video)));
-
   mergedVideo.on("end", () => console.log("ok")).mergeToFile(outputPath);
 };
 
