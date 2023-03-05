@@ -7,7 +7,7 @@ const wordsOfLevel = wordList.filter((index) => index.level === "A1");
 
 const createVideoParts = async () => {
   for (let index = 0; index < wordsOfLevel.length; index++) {
-    if (index % 8 === 0) {
+    if (index % 8 === 0 && index !== 0) {
       await new Promise((resolve) => setTimeout(resolve, 4000)); // protect from google server overload
     }
 
@@ -46,6 +46,13 @@ const createVideoParts = async () => {
 
 createVideoParts()
   .then(() =>
-    mergeAllClips([...wordsOfLevel.map((data, i) => `clips/${i}.mp4`)])
+    mergeAllClips(
+      [
+        ...[...Array(wordsOfLevel.length * 2).keys()].map(
+          (data, i) => `clips/${i}.mp4`
+        ),
+      ],
+      "output/video.mp4"
+    )
   )
   .catch((err) => console.log(err));
