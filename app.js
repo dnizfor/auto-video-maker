@@ -4,7 +4,7 @@ import createVoice from "./utils/createVoice.js";
 import mergeAllClips from "./utils/mergeAllClips.js";
 
 const wordsOfLevel = wordList.filter((index) => index.level === "A1");
-
+console.log(wordsOfLevel.length);
 const createVideoParts = async () => {
   for (let index = 0; index < wordsOfLevel.length; index++) {
     if (index % 8 === 0 && index !== 0) {
@@ -46,13 +46,10 @@ const createVideoParts = async () => {
 
 createVideoParts()
   .then(() =>
-    mergeAllClips(
-      [
-        ...[...Array(wordsOfLevel.length * 2).keys()].map(
-          (data, i) => `clips/${i}.mp4`
-        ),
-      ],
-      "output/video.mp4"
-    )
+    mergeAllClips([
+      ...[...Array(wordsOfLevel.length * 2).keys()].map(
+        (data, i) => `clips/${i}.mp4`
+      ),
+    ])
   )
   .catch((err) => console.log(err));
