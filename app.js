@@ -3,12 +3,14 @@ import createVideo from "./utils/createVideo.js";
 import createVoice from "./utils/createVoice.js";
 import mergeAllClips from "./utils/mergeAllClips.js";
 
-const wordsOfLevel = wordList
-  .filter((index) => index.level === "A2")
-  .slice(0, 1);
+const wordsOfLevel = wordList.filter((index) => index.level === "A1");
 
 const createVideoParts = async () => {
   for (let index = 0; index < wordsOfLevel.length; index++) {
+    if (index % 8 === 0) {
+      await new Promise((resolve) => setTimeout(resolve, 4000)); // protect from google server overload
+    }
+
     await createVoice(
       wordsOfLevel[index].word,
       "en",
@@ -24,36 +26,19 @@ const createVideoParts = async () => {
         await setTimeout(() => console.log("wait"), 5000);
       }
       for (let index = 0; index < wordsOfLevel.length; index++) {
-        try {
-          await createVideo(
-            wordsOfLevel[index].word,
-            "",
-            `clips/${index * 2}.mp4`,
-            `./voices/${index * 2}.mp3`
-          );
-        } catch {
-          await createVideo(
-            wordsOfLevel[index].word,
-            "",
-            `clips/${index * 2}.mp4`,
-            "assets/errsound.mp3"
-          );
-        }
-        try {
-          await createVideo(
-            wordsOfLevel[index].word,
-            wordsOfLevel[index].mean,
-            `clips/${index * 2 + 1}.mp4`,
-            `voices/${index * 2 + 1}.mp3`
-          );
-        } catch {
-          await createVideo(
-            wordsOfLevel[index].word,
-            wordsOfLevel[index].mean,
-            `clips/${index * 2}.mp4`,
-            "assets/errsound.mp3"
-          );
-        }
+        await createVideo(
+          wordsOfLevel[index].word,
+          "",
+          `clips/${index * 2}.mp4`,
+          `./voices/${index * 2}.mp3`
+        );
+
+        await createVideo(
+          wordsOfLevel[index].word,
+          wordsOfLevel[index].mean,
+          `clips/${index * 2 + 1}.mp4`,
+          `voices/${index * 2 + 1}.mp3`
+        );
       }
     }
   }
