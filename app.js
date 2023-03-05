@@ -46,9 +46,6 @@ const createVideoParts = async () => {
 
 createVideoParts()
   .then(() =>
-    mergeAllClips(
-      [...wordsOfLevel.map((data, i) => `clips/${i}.mp4`)],
-      "./output/video.mp4"
-    )
+    mergeAllClips([...wordsOfLevel.map((data, i) => `clips/${i}.mp4`)])
   )
   .catch((err) => console.log(err));
