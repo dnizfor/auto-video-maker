@@ -1,4 +1,5 @@
 import Ffmpeg from "fluent-ffmpeg";
+import fs from "fs";
 // concat 3 mp4s together using 2 500ms directionalWipe transitions
 
 const mergeClips = (videoNames, outputPath) => {
@@ -22,5 +23,21 @@ const mergeAllClips = async (videoNames) => {
     await mergeClips(videoList, `./output/video-${rate}.mp4`);
     rate += 1;
   }
+  files = fs.readdirSync("output/");
+
+  // maximum array length is 400 in ffmpeg. If your output videos bigger than 400 you should write more code .
+  // I dont because by output videos count less than 400 . İt is enought for me.
+
+  await mergeClips(
+    [...files.map((path) => `output/${path}`)],
+    `output/last-video.mp4`
+  );
+  let files = await fs.readdirSync("output/");
+
+  files.map((path) => {
+    if (path !== "last-video.mp4") {
+      fs.unlink(`output/${path}`, (err) => console.log(err));
+    }
+  });
 };
 export default mergeAllClips;
