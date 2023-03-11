@@ -10,12 +10,12 @@ const createVideo = async (text1, text2, outputPath, soundPath) => {
   ffmpeg.setFfmpegPath(ffmpegStatic);
 
   const dataUri = new UltimateTextToImage(text1, {
-    fontSize: 50,
+    fontSize: 150,
   })
     .render()
     .toDataUrl();
   const dataUri2 = new UltimateTextToImage(text2, {
-    fontSize: 20,
+    fontSize: 60,
   })
     .render()
     .toDataUrl();
@@ -73,8 +73,8 @@ const createVideo = async (text1, text2, outputPath, soundPath) => {
     let t = time / duration;
 
     // Draw the image from left to right over a distance of 550 pixels
-    context.drawImage(logo, 100, 300);
-    context.drawImage(logo2, 100, 400);
+    context.drawImage(logo, 100, 200);
+    context.drawImage(logo2, 100, 500);
     context.drawImage(icon, 1050, 10);
   }
 };
