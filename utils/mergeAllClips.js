@@ -23,7 +23,7 @@ const mergeAllClips = async (videoNames) => {
     await mergeClips(videoList, `./output/video-${rate}.mp4`);
     rate += 1;
   }
-  files = fs.readdirSync("output/");
+  let files = fs.readdirSync("output/");
 
   // maximum array length is 400 in ffmpeg. If your output videos bigger than 400 you should write more code .
   // I dont because by output videos count less than 400 . İt is enought for me.
@@ -32,7 +32,7 @@ const mergeAllClips = async (videoNames) => {
     [...files.map((path) => `output/${path}`)],
     `output/last-video.mp4`
   );
-  let files = await fs.readdirSync("output/");
+  files = await fs.readdirSync("output/");
 
   files.map((path) => {
     if (path !== "last-video.mp4") {
