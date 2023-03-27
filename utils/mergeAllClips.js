@@ -14,7 +14,7 @@ const mergeClips = (videoNames, outputPath) => {
     });
   });
 };
-const mergeAllClips = async (videoNames) => {
+const mergeAllClips = async (videoNames, endName) => {
   let shadowArray = [...Array(videoNames.length).keys()];
   let rate = 0;
   while (shadowArray.length) {
@@ -30,7 +30,7 @@ const mergeAllClips = async (videoNames) => {
 
   await mergeClips(
     [...files.map((path) => `output/${path}`)],
-    `output/last-video.mp4`
+    `end/last-video-${endName}.mp4`
   );
   files = await fs.readdirSync("output/");
 

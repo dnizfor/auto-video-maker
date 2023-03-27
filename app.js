@@ -3,9 +3,7 @@ import createVideo from "./utils/createVideo.js";
 import createVoice from "./utils/createVoice.js";
 import mergeAllClips from "./utils/mergeAllClips.js";
 
-const wordsOfLevel = wordList.filter((index) => index.level === "A1");
-console.log(wordsOfLevel.length);
-const createVideoParts = async () => {
+const createVideoParts = async (wordsOfLevel) => {
   for (let index = 0; index < wordsOfLevel.length; index++) {
     if (index % 8 === 0 && index !== 0) {
       await new Promise((resolve) => setTimeout(resolve, 4000)); // protect from google server overload
@@ -18,7 +16,7 @@ const createVideoParts = async () => {
     );
     await createVoice(
       wordsOfLevel[index].mean,
-      "tr",
+      "id",
       `./voices/${index * 2 + 1}.mp3`
     );
     if (index + 1 === wordsOfLevel.length) {
@@ -44,12 +42,30 @@ const createVideoParts = async () => {
   }
 };
 
-createVideoParts()
-  .then(() =>
-    mergeAllClips([
-      ...[...Array(wordsOfLevel.length * 2).keys()].map(
-        (data, i) => `clips/${i}.mp4`
-      ),
-    ])
-  )
-  .catch((err) => console.log(err));
+const levels = ["A1", "A2", "B1", "B2", "C1", ""];
+const make = async (index) => {
+  try {
+    const level = levels[index];
+    const wordsOfLevel =
+      level === ""
+        ? wordList
+        : wordList.filter((index) => index.level === level);
+    await createVideoParts(wordsOfLevel);
+    await mergeAllClips(
+      [
+        ...[...Array(wordsOfLevel.length * 2).keys()].map(
+          (data, i) => `clips/${i}.mp4`
+        ),
+      ],
+      level
+    );
+  } catch {
+    make();
+  }
+};
+const start = async () => {
+  for (let index = 0; index < levels.length; index++) {
+    await make(index);
+  }
+};
+start();
