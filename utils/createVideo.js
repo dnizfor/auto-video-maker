@@ -10,11 +10,13 @@ const createVideo = async (text1, text2, outputPath, soundPath) => {
   ffmpeg.setFfmpegPath(ffmpegStatic);
 
   const dataUri = new UltimateTextToImage(text1, {
+    fontFamily: "Arial, Sans",
     fontSize: 150,
   })
     .render()
     .toDataUrl();
   const dataUri2 = new UltimateTextToImage(text2, {
+    fontFamily: "Arial, Sans",
     fontSize: 60,
   })
     .render()
