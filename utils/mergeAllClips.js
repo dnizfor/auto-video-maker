@@ -18,7 +18,7 @@ const mergeAllClips = async (videoNames, endName) => {
   let shadowArray = [...Array(videoNames.length).keys()];
   let rate = 0;
   while (shadowArray.length) {
-    let videoList = shadowArray.splice(0, 400);
+    let videoList = shadowArray.splice(0, 100);
     videoList = [...videoList.map((item) => `clips/${item}.mp4`)];
     await mergeClips(videoList, `./output/video-${rate}.mp4`);
     rate += 1;
