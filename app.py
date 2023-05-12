@@ -19,6 +19,6 @@ for level in levels:
     for item in words_of_level:
         create_video_clip(item['word'], item['mean'], "en", "iw")
 
-shutil.copy("assets/intro.mp4", "clips/0.mp4")
+    shutil.copy("assets/intro.mp4", "clips/0.mp4")
 
-concatenate_clips_in_folder('clips', level)
+    concatenate_clips_in_folder('clips', level)
