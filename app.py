@@ -2,6 +2,7 @@ from conconate_videos import concatenate_clips_in_folder
 from create_video_clips import create_video_clip
 import json
 import shutil
+import os
 
 # Load JSON data from a file
 with open('lib/data.json', 'r', encoding="utf-8") as f:
@@ -17,7 +18,8 @@ for level in levels:
     print(words_of_level)
 
     for item in words_of_level:
-        create_video_clip(item['word'], item['mean'], "en", "iw")
+        if(f'{item["word"]}.mp4' not in os.listdir("clips")):
+            create_video_clip(item['word'], item['mean'], "en", "zh-CN")
 
     shutil.copy("assets/intro.mp4", "clips/0.mp4")
 
