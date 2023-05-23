@@ -13,7 +13,7 @@ def concatenate_clips_in_folder(folder_path, output):
             f.write(f"file '{file}'\n")
 
     # Use FFMPEG to concatenate the videos
-    cmd = f'ffmpeg -f concat -safe 0 -i input.txt -c copy {output}.mp4'
+    cmd = f'ffmpeg -f concat -safe 0 -i input.txt -c copy output/{output}.mp4'
     subprocess.run(cmd, shell=True)
 
     # Delete the temporary file
