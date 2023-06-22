@@ -4,7 +4,9 @@
 
 Tool For create youtube videos from json !
 
-###Supported Languages
+- You have to change the font for different alphabets. 
+
+### Supported Languages
 
 - af: Afrikaans
 - ar: Arabic
