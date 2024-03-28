@@ -1,27 +1,25 @@
 import os
-from moviepy.editor import VideoFileClip, concatenate_videoclips
+import subprocess
+from moviepy.editor import *
 
 
-def concatenate_clips_in_folder(folder_path, output):
+def concatenate_clips_in_folder(folder_path, output, intro):
     # Get a list of all mp4 files in the folder
-    video_paths = [os.path.join(folder_path, f)
-                   for f in os.listdir(folder_path) if f.endswith('.mp4')]
-    print(video_paths)
+    files = [os.path.join(folder_path, f)
+             for f in os.listdir(folder_path) if f.endswith('.mp4')]
 
-    merged_video = concatenate_videoclips([VideoFileClip(video_paths[0]),
-                                          VideoFileClip(video_paths[1])])
+    # Create a temporary file to store the list of input files
+    with open('input.txt', 'w') as f:
+        for file in files:
+            f.write(f"file '{file}'\n")
 
-    for i in range(2, len(video_paths)):
-        video_to_add = VideoFileClip(video_paths[i])
-        merged_video = concatenate_videoclips([merged_video, video_to_add])
-        print("okkk")
+    # Use FFMPEG to concatenate the videos
+    cmd = f'ffmpeg -f concat -safe 0 -i input.txt -af aresample=async=1 -c:v copy output/{output}.mp4'
+    subprocess.run(cmd, shell=True)
 
-    merged_video.write_videofile(
-        f'output/{output}-video.mp4', codec="libx264", audio_bufsize=1000,    audio_bitrate='192k',
-        audio_fps=44100,
-        audio_nbytes=2,
-        audio_codec="aac",)
-    merged_video.close()
+    # Delete the temporary file
+    os.remove('input.txt')
+    # os.remove('output/main_video.mp4')
 
-
-concatenate_clips_in_folder("test", "b2")
+    for i in os.listdir("clips"):
+        os.remove(f"clips/{i}")

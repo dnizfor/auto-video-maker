@@ -9,5 +9,89 @@
         "mean": " aktivite",
         "level": "A1",
         "type": "noun"
+       },
+       {
+        "word": "actor",
+        "mean": " aktör",
+        "level": "A1",
+        "type": "noun"
+       },
+       {
+        "word": "actress",
+        "mean": " aktris",
+        "level": "A1",
+        "type": "noun"
+       },
+       {
+        "word": "add",
+        "mean": " eklemek",
+        "level": "A1",
+        "type": "verb"
+       },
+       {
+        "word": "address",
+        "mean": " adres",
+        "level": "A1",
+        "type": "noun"
+       },
+       {
+        "word": "advice",
+        "mean": " tavsiye",
+        "level": "A1",
+        "type": "noun"
+       },
+       {
+        "word": "afternoon",
+        "mean": " öğleden sonra",
+        "level": "A1",
+        "type": "noun"
+       },
+       {
+        "word": "age",
+        "mean": " yaş",
+        "level": "A1",
+        "type": "noun"
+       },
+       {
+        "word": "agree",
+        "mean": " kabul etmek",
+        "level": "A1",
+        "type": "verb"
+       },
+       {
+        "word": "air",
+        "mean": " hava",
+        "level": "A1",
+        "type": "noun"
+       },
+       {
+        "word": "airport",
+        "mean": " havalimanı",
+        "level": "A1",
+        "type": "noun"
+       },
+       {
+        "word": "animal",
+        "mean": " hayvan",
+        "level": "A1",
+        "type": "noun"
+       },
+       {
+        "word": "answer",
+        "mean": " cevap",
+        "level": "A1",
+        "type": "noun"
+       },
+       {
+        "word": "apartment",
+        "mean": " apartman",
+        "level": "A1",
+        "type": "noun"
+       },
+       {
+        "word": "apple",
+        "mean": " elma",
+        "level": "A1",
+        "type": "noun"
        }
 ]
