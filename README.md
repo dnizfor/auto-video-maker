@@ -8,6 +8,10 @@ Tool For create youtube videos from json !
 
 [Example Result Video](https://www.youtube.com/watch?v=253vwC1K9nI)
 
+# dependencies
+
+- İmageMagic
+
 ### Supported Languages
 
 - af: Afrikaans
