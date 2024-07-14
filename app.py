@@ -3,8 +3,9 @@ from create_video_clips import create_video_clip
 import json
 import os
 
-os.mkdir("output")
-os.mkdir("clips")
+if not os.path.exists("output"):
+    os.mkdir("output")
+    os.mkdir("clips")
 
 # Load JSON data from a file
 with open('lib/home.json', 'r', encoding="utf-8") as f:
