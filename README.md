@@ -12,6 +12,25 @@ Tool For create youtube videos from json !
 
 - İmageMagic
 
+## Piper TTS
+
+Seslendirme yerel olarak Piper TTS ile yapılır. Bağımlılıkları ve varsayılan
+İngilizce/İspanyolca ses modellerini kurun:
+
+```bash
+python -m pip install -r requirements.txt
+python -m piper.download_voices --data-dir assets/voices en_US-lessac-medium es_ES-sharvard-medium
+```
+
+Farklı modeller kullanmak için modelin `.onnx` dosyasını ortam değişkeniyle
+belirtin. Eşleşen `.onnx.json` dosyası aynı klasörde bulunmalıdır:
+
+```bash
+export PIPER_VOICE_EN=/path/to/english-model.onnx
+export PIPER_VOICE_ES=/path/to/spanish-model.onnx
+python app.py
+```
+
 ### Supported Languages
 
 - af: Afrikaans

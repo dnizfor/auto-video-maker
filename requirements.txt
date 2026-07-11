@@ -1,5 +1,5 @@
 moviepy==2.0.0.dev1
-gTTS==2.3.2
+piper-tts==1.4.2
 ffmpeg-python==0.2.0
 googletrans==3.1.0a0
 translate==3.6.1

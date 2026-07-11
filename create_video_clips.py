@@ -1,24 +1,34 @@
 from moviepy.editor import *
-from gtts import gTTS
 import os
+import tempfile
+
+from piper_tts import synthesize_to_wav
 
 
 def create_video_clip(word, mean, lang1, lang2,output_name):
-    # Create audio files for word and mean
-    word_audio = gTTS(text=word, lang=lang1)
-    word_audio.save(f"word.mp3")
-    mean_audio = gTTS(text=mean, lang=lang2)
-    mean_audio.save(f"word-mean.mp3")
+    # Create local audio files with Piper TTS.
+    word_audio_file = tempfile.NamedTemporaryFile(suffix=".wav", delete=False)
+    mean_audio_file = tempfile.NamedTemporaryFile(suffix=".wav", delete=False)
+    word_audio_path = word_audio_file.name
+    mean_audio_path = mean_audio_file.name
+    word_audio_file.close()
+    mean_audio_file.close()
+
+    synthesize_to_wav(word, lang1, word_audio_path)
+    synthesize_to_wav(mean, lang2, mean_audio_path)
+
+    word_audio = AudioFileClip(word_audio_path)
+    mean_audio = AudioFileClip(mean_audio_path)
 
     # Create video clips for word and mean
     word_clip = TextClip(word, fontsize=150, color='black',
                          bg_color="white", size=(1920, 1080), font='assets/NotoSansSC-Medium.otf')
     word_clip = word_clip.set_duration(
-        3).set_audio(AudioFileClip("word.mp3"))
+        max(3, word_audio.duration)).set_audio(word_audio)
     mean_clip = TextClip(f"{word}\n{mean}", fontsize=150,
                          color='black', bg_color="white", size=(1920, 1080), font='assets/NotoSansSC-Medium.otf')
     mean_clip = mean_clip.set_duration(
-        3).set_audio(AudioFileClip("word-mean.mp3"))
+        max(3, mean_audio.duration)).set_audio(mean_audio)
 
     # Concatenate the two clips
     final_clip = concatenate_videoclips([word_clip, mean_clip])
@@ -37,5 +47,7 @@ def create_video_clip(word, mean, lang1, lang2,output_name):
     final_clip.write_videofile(f"clips/{output_name}.mp4", fps=1)
 
     # Delete the temporary audio files
-    os.remove(f"word.mp3")
-    os.remove(f"word-mean.mp3")
+    word_audio.close()
+    mean_audio.close()
+    os.remove(word_audio_path)
+    os.remove(mean_audio_path)

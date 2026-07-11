@@ -3,16 +3,14 @@ from create_video_clips import create_video_clip
 import json
 import os
 
-if not os.path.exists("output"):
-    os.mkdir("output")
-    os.mkdir("clips")
+os.makedirs("output", exist_ok=True)
+os.makedirs("clips", exist_ok=True)
 
 # Load JSON data from a file
-with open('lib/home.json', 'r', encoding="utf-8") as f:
+with open('lib/data.json', 'r', encoding="utf-8") as f:
     words_and_means = json.load(f)
 
 levels = ["A1", "A2", "B1", "B2", "C1"]
-levels = [0]
 print(words_and_means[0])
 
 for level in levels:
@@ -26,7 +24,7 @@ for level in levels:
 
     for item in words_of_level:
         if (f'{index}.mp4' not in os.listdir("clips")):
-            create_video_clip(item['word'], item['mean'], "en", "tr",index)
+            create_video_clip(item['word'], item['mean'], "en", "es",index)
         index +=1
 
     concatenate_clips_in_folder('clips', level, "assets/intro.mp4")
