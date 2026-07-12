@@ -14,16 +14,16 @@ Tool For create youtube videos from json !
 
 ## Piper TTS
 
-Seslendirme yerel olarak Piper TTS ile yapılır. Bağımlılıkları ve varsayılan
-İngilizce/İspanyolca ses modellerini kurun:
+Voice synthesis is performed locally using Piper TTS. 
+Install the dependencies and the default English/Spanish voice models:
 
 ```bash
 python -m pip install -r requirements.txt
 python -m piper.download_voices --data-dir assets/voices en_US-lessac-medium es_ES-sharvard-medium
 ```
 
-Farklı modeller kullanmak için modelin `.onnx` dosyasını ortam değişkeniyle
-belirtin. Eşleşen `.onnx.json` dosyası aynı klasörde bulunmalıdır:
+To use different models, specify the model's `.onnx` file via an environment variable. 
+The corresponding `.onnx.json` file must be located in the same folder:
 
 ```bash
 export PIPER_VOICE_EN=/path/to/english-model.onnx
